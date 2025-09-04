@@ -1,0 +1,53 @@
+*{
+  //border: 1px solid red;
+  text-align: justify;
+}
+body{
+  background-color: #161A1B;
+  width: 100%;
+  height: 100vh; //
+  color: $white;
+}
+span{
+  color: $main-color-lighter;
+  font-weight: bolder;
+}
+#header{
+  width: 100%;
+  height: 10vh;
+  background: $middle-color;
+  @include flex-center;
+  justify-content: space-between;
+  $font-size: 20px;
+
+  .section{
+    height: 90%;
+    width: 40%;
+    @include flex-center;
+  }
+  #project-info{
+    justify-content: flex-start;
+    #project-logo{
+      $circle-size: 60px;
+      width: $circle-size;
+      height: $circle-size;
+
+      margin-inline: 15px;
+
+      background-color: $main-color-lighter;
+      border-radius: 100%;
+    }
+    #project-name{
+      font-size: 30px;
+    }
+  }
+  #project-links{
+    @include flex-center;
+    justify-content: space-evenly;
+    .header-link{
+      font-size: $font-size;
+    }
+  }
+}
+
+

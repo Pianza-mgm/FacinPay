@@ -1,0 +1,11 @@
+There are two main folders: Public (for everyone) and Private (for authenticated users only)
+For the auth, we're using NextAuth with a middleware to control who can access the private pages
+The connection with the db api is done using axios and a file called router.ts (one for each page)
+
+Components: 
+The Header is global, defined at the main Layout
+The sidebar works as a separated component, but, in the 'Data' folder, this component acts like a Nested Layout
+
+Settings:
+'npm i sass-embedded sass-loader' to inject global variables automatically into my other scss files (must me configured at next.config.ts)
+'npm install -D typescript-plugin-css-modules' for css to recognize ts (must be configured at tsconfig.json)
