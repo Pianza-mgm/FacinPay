@@ -6,7 +6,6 @@ import { getToken } from "next-auth/jwt";
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // A rota é /private, não /app/private
   if (pathname.startsWith("/private")) {
     const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 

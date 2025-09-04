@@ -5,27 +5,34 @@ import { signIn } from "next-auth/react";
 
 export default function Page() {
   const[form, setForm] = useState({
-    username: "",
+    email: "",
     password: "",
   })
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const result = await signIn("credentials", {
+    const res = await signIn("credentials", {
       redirect: true,
-      callbackUrl: "/private/data/dashboard",
-      username: form.username,
+      callbackUrl: '/private/data/dashboard',
+      email: form.email,
       password: form.password,
     });
-  }
+
+    if (res?.error) {
+      alert("Credenciais inválidas");
+    } else {
+      alert("Login realizado com sucesso!");
+    }
+  };
 
 
   const inputs: InputProps[]=[
     {
       type: "text",
-      placeholder: "Username",
-      value: form.username,
-      onChange: (e) => setForm({ ...form, ['username'] : e.target.value})
+      placeholder: "Email",
+      value: form.email,
+      onChange: (e) => setForm({ ...form, ['email'] : e.target.value})
     },
     {
       type: "password",
