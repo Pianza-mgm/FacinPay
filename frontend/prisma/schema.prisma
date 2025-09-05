@@ -13,38 +13,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id                 String          @id          @default(auto()) @map("_id") @db.ObjectId
-  username           String    
-  email              String          @unique
-  password           String
-  monthlyWrapupIn    MonthlyWrapupIn[]
-  monthlyWrapupOut   MonthlyWrapupOut[]
-  overallData        OverallData?
-  goals              Goals[]
-}
 enum UserPlan{
   Free
   Standard
   Complete
 }
-model OverallData{
-  id                 String          @id          @default(auto()) @map("_id") @db.ObjectId
-  availableValue     Float
-  goalsAvaliable     Int
-  userPlan           UserPlan        @default(Free)
+model User {
+  id                 String           @id          @default(auto()) @map("_id") @db.ObjectId
+  username           String     
+  email              String           @unique
+  password           String 
+  userPlan           UserPlan         @default(Free)
+  overallData        OverallData? 
+  goals              Goals[] 
+  goalsAvaliable     Int              @default(3)
+}
 
-  userID             String          @db.ObjectId @unique
-  user               User            @relation(fields: [userID], references: [id])
+model OverallData{
+  id                 String           @id          @default(auto()) @map("_id") @db.ObjectId
+  availableValue     Float            @default(0)
+  salary             Float            @default(0)
+  expenses           Expenses?
+  monthlyWrapupIns   MonthlyWrapupIn[]
+  monthlyWrapupOuts  MonthlyWrapupOut[]
+
+  userID             String           @db.ObjectId @unique
+  user               User             @relation(fields: [userID], references: [id])
 }
 
 model MonthlyWrapupIn {
   id                 String           @id @default(auto()) @map("_id") @db.ObjectId
-  salary             Float //refers to user salary - apply in backend
+  salary             Float            //refers to user.overall.salary - apply in backend
   earnings           Earning[]
         
-  userId             String           @db.ObjectId @unique
-  user               User             @relation(fields: [userId], references: [id])
+  overallDataID      String           @db.ObjectId @unique
+  overallData        OverallData      @relation(fields: [overallDataID], references: [id])
 }
 model Earning {
   id                 String           @id          @default(auto()) @map("_id") @db.ObjectId
@@ -59,18 +62,21 @@ model Earning {
 
 model MonthlyWrapupOut {
   id                 String           @id @default(auto()) @map("_id") @db.ObjectId
-  expenses           Expenses?
+  expenses           Expenses?        //refers to user.overall.salary
   purchases          Purchases[]
 
-  userId             String           @db.ObjectId @unique
-  user               User             @relation(fields: [userId], references: [id])
+  overallDataID      String           @db.ObjectId @unique
+  overallData        OverallData      @relation(fields: [overallDataID], references: [id])
 }
 model Expenses {
   id                 String           @id          @default(auto()) @map("_id") @db.ObjectId
   title              String
-  value              Float //compilated values from 'constantDebits' - apply in backend
+  value              Float            //compilated values from 'constantDebits' - apply in backend
   constantDebits     Purchases[]
+  createdAt          DateTime         @default(now())
 
+  overallDataID      String           @unique      @db.ObjectId
+  overallData        OverallData      @relation(fields: [overallDataID], references: [id])
   monthlyWrapupOutID String           @unique      @db.ObjectId
   monthlyWrapupOut   MonthlyWrapupOut @relation(fields: [monthlyWrapupOutID], references: [id])
 }
@@ -97,7 +103,7 @@ model Goals{
   intentedDate       DateTime
   finishedAt         DateTime?
   dedicatedValues    Float[]
-  totalAmount        Float //compilation of all dedicatedValues
+  totalAmount        Float            //compilation of all dedicatedValues
   isDone             Boolean
 
   userID             String           @db.ObjectId

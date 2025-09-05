@@ -20,3 +20,13 @@ export async function POST(req: Request){
     return NextResponse.json({ error: "Erro ao registrar usuário" }, { status: 400 });
   }
 }
+export async function GET(req: Request){
+  const { searchParams } = new URL(req.url);
+  const email = searchParams.get("email");
+  if (!email) {
+    return NextResponse.json({ error: "Email é obrigatório" }, { status: 400 });
+  }
+  const user = await prisma.user.findUnique({ where: { email } });
+  console.log(user)
+  return NextResponse.json(user);
+}

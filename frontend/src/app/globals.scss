@@ -26,6 +26,7 @@ span{
     @include flex-center;
   }
   #project-info{
+    width: auto;
     justify-content: flex-start;
     #project-logo{
       $circle-size: 60px;

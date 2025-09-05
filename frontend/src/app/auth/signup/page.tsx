@@ -19,7 +19,7 @@ export default function Page() {
     }
     try {
       const {confirmedPassword, ...payload} = form;
-      await api.post("api/signup", payload);
+      await api.post("/user", payload);
       const res = await signIn("credentials", {
         redirect: true,
         callbackUrl: '/private/data/dashboard',
