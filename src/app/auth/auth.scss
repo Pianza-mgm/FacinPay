@@ -1,0 +1,15 @@
+#screen{
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+    position: relative;
+    @include flex-center;
+}
+#screen::before {
+    content: "";
+    position: absolute;
+    inset: 0; /* ocupa 100% do container */
+    opacity: 0.80; /* só o fundo fica transparente */
+    z-index: -1;  /* joga atrás do conteúdo */
+    background: url("/uploads/login-bg.jpg") no-repeat center/cover;
+}

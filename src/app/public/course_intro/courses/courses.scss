@@ -1,0 +1,110 @@
+#page{
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+
+    $left-distance: 5vw;
+    #sub-header{
+        width: 100%;
+        height: 30%;
+        @include flex-center;
+        justify-content: flex-start;
+        background: linear-gradient(to right, #052B1E 70%, #104c2ae6 85%);
+
+        #content-container{
+            height: 80%;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: $left-distance;
+
+
+            #symbolic-path{
+            }
+            #title{
+                position: relative;
+                display: inline;
+                color: white;
+                font-size: 35px;
+                font-weight: bolder;
+
+                &::before{
+                    content: "";
+                    height: 80%;
+                    width: 7.5px;
+                    position: absolute;
+                    top: 20%;
+                    display: inline-block;
+                    margin-left: -17.5px;
+                    background-color: $main-color;
+                }
+            }
+            #description{
+
+            }
+        }
+    }
+    #main-container{
+        height: 70%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        padding: 10px 0;
+        padding-left: $left-distance;
+
+        #metadata-container{
+            
+            h2{
+                font-weight: 500;
+                font-size: 17.5px;
+            }
+            #details{
+                font-size: 12.5px;
+                font-weight: lighter;
+            } 
+        }
+        #modules-container{
+            width: 70%;
+            height: 87.5%;
+            background: $white-green;
+            border: solid 3px $dark-main-color;
+            border-radius: 10px;
+            .module{
+                height: 16.75%;
+                @include flex-center;
+                justify-content: space-between;
+                padding: 0 15px;
+                border-bottom: solid 2px $dark-main-color;
+                >*{
+                    height: 100%;
+                    @include flex-center;
+                    font-size: 17.5px;
+                }
+                #indexer{
+                    color: $dark-main-color;
+                    font-weight: 500;
+                }
+                #title{
+                    width: 70%;
+                    display: flex;
+                    justify-content: flex-start;
+                    color: $main-color;
+                    font-weight: 500;
+                }
+                #expectedTime{
+                    color: $dark-main-color;
+                }
+                &:last-of-type{
+                    border-bottom: none;
+                }
+            }
+        }
+        #card{
+            transform: translate(-10%, -25%);
+        }
+    }
+}

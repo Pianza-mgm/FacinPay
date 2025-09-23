@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum UserPlan{
+  Free
+  Standard
+  Complete
+}
+model User {
+  id                 String           @id          @default(auto()) @map("_id") @db.ObjectId
+  username           String     
+  email              String           @unique
+  password           String 
+  userPlan           UserPlan         @default(Free)
+  overallData        OverallData? 
+  goals              Goals[] 
+  goalsAvaliable     Int              @default(3)
+}
+
+model OverallData{
+  id                 String           @id          @default(auto()) @map("_id") @db.ObjectId
+  availableValue     Float            @default(0)
+  salary             Float            @default(0)
+  expenses           Expenses?
+  monthlyWrapupIns   MonthlyWrapupIn[]
+  monthlyWrapupOuts  MonthlyWrapupOut[]
+
+  userID             String           @db.ObjectId @unique
+  user               User             @relation(fields: [userID], references: [id])
+}
+
+model MonthlyWrapupIn {
+  id                 String           @id @default(auto()) @map("_id") @db.ObjectId
+  salary             Float            //refers to user.overall.salary - apply in backend
+  earnings           Earning[]
+        
+  overallDataID      String           @db.ObjectId @unique
+  overallData        OverallData      @relation(fields: [overallDataID], references: [id])
+}
+model Earning {
+  id                 String           @id          @default(auto()) @map("_id") @db.ObjectId
+  title              String         
+  desc               String         
+  value              Float        
+  month              DateTime         @default(now())
+  
+  monthlyWrapupInID  String           @db.ObjectId
+  monthlyWrapupIn    MonthlyWrapupIn  @relation(fields: [monthlyWrapupInID], references: [id])
+}
+
+model MonthlyWrapupOut {
+  id                 String           @id @default(auto()) @map("_id") @db.ObjectId
+  expenses           Expenses?        //refers to user.overall.salary
+  purchases          Purchases[]
+
+  overallDataID      String           @db.ObjectId @unique
+  overallData        OverallData      @relation(fields: [overallDataID], references: [id])
+}
+model Expenses {
+  id                 String           @id          @default(auto()) @map("_id") @db.ObjectId
+  title              String
+  value              Float            //compilated values from 'constantDebits' - apply in backend
+  constantDebits     Purchases[]
+  createdAt          DateTime         @default(now())
+
+  overallDataID      String           @unique      @db.ObjectId
+  overallData        OverallData      @relation(fields: [overallDataID], references: [id])
+  monthlyWrapupOutID String           @unique      @db.ObjectId
+  monthlyWrapupOut   MonthlyWrapupOut @relation(fields: [monthlyWrapupOutID], references: [id])
+}
+model Purchases{
+  id                 String           @id          @default(auto()) @map("_id") @db.ObjectId
+  title              String
+  desc               String
+  value              Float
+  month              DateTime         @default(now())
+
+  monthlyWrapupOutID String           @db.ObjectId
+  monthlyWrapupOut   MonthlyWrapupOut @relation(fields: [monthlyWrapupOutID], references: [id])
+  //only for constant debits it'll be defined
+  expenseID          String?          @db.ObjectId
+  expense            Expenses?        @relation(fields: [expenseID], references: [id])
+}
+
+model Goals{
+  id                 String           @id          @default(auto()) @map("_id") @db.ObjectId
+  title              String
+  description        String
+  valueToReach       Float
+  createdAt          DateTime         @default(now())
+  intentedDate       DateTime
+  finishedAt         DateTime?
+  dedicatedValues    Float[]
+  totalAmount        Float            //compilation of all dedicatedValues
+  isDone             Boolean
+
+  userID             String           @db.ObjectId
+  user               User             @relation(fields: [userID], references: [id])
+}

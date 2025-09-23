@@ -1,0 +1,25 @@
+$bg-color: #161A1B;
+
+$white: #E2F2EE;
+$white-green: #C4DCD6;
+
+$black: #0F1113;
+
+$main-color-lighter: #0CB85F;
+$main-color: #129B4B;
+$main-color-darker: #18855F;
+
+$middle-color: #0C3426;
+
+$dark-main-color-lighter: #052B1E;
+$dark-main-color: #042522;
+
+@mixin flex-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin highlight-text{
+  color: $main-color;
+  font-weight: bolder;
+}

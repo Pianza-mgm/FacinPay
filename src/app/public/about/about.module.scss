@@ -1,0 +1,262 @@
+.page{
+    width: 85vw;
+}
+.main{
+
+    padding: 2.5rem 4rem 0;
+    *{
+        color: $white-green;
+    }
+    section{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 2.5rem;
+
+        .sectionTitleDisplayer{
+            width: 50%;
+            height: 7vh;
+            position: relative;
+            background-color: $main-color-darker;
+            border-radius: 2px;
+
+            p{
+                color: $white;
+                margin-left: 10px;
+                font-size: 2rem;
+            }
+            &::before{
+                content: "";
+                display: inline-block;
+                height: 100%;
+                width: 15px;
+                background-color: $main-color;
+                position: absolute;
+                bottom: 0;
+                left: -25px
+            }
+        }
+        .contentContainer{
+            width: 100%;
+            border: solid 2px $white;
+            margin-top: 1.25rem;
+            border-radius: 10px;
+        }
+    }
+    .project{
+        width: 100%;
+        height: 75vh;
+        margin-top: 10vh;
+
+        .contentContainer{
+            @include flex-center;
+            justify-content: space-between;
+            flex: 1;
+
+            .projectLogo{
+                $logo-size: 25vw;
+                height: $logo-size;
+                width: $logo-size;
+                margin-left: 2rem;
+                border-radius: 100%;
+                background: $main-color;
+            }
+            .textContainer{
+                height: 90%;
+                width: 55%;
+                @include flex-center;
+                justify-content: space-between;
+                flex-direction: column;
+                margin-right: 2rem;
+                
+                >*{
+                    width: 100%;
+                    text-align: center;
+                }
+                h1{
+                    font-size: 60px;
+                    span{
+                        @include highlight-text;
+                    }
+                }
+                .description{
+                    font-size: 32.5px;
+                    margin-bottom: 40px;
+                }
+                .slogan{
+                    font-size: 22.5px;
+                    color: $white;
+                }
+            }
+        }
+        
+    }
+    .team{
+        .contentContainer{
+            @include flex-center;
+            justify-content: space-between;
+            border: none;
+            .card{/*representative*/}
+        }
+    }
+    .creation{
+        .contentContainer{
+            @include flex-center;
+            flex-direction: column;
+            justify-content: space-between;
+            border: none;
+
+            .creationWrapper{
+                $text-left-margin: 75px;
+                width: 100%;
+                height: 75vh;
+                margin-bottom: 2.5rem;
+                border: solid 2px $white;
+                border-radius: 10px;
+                overflow: hidden;
+
+                .subHeader{
+                    width: 100%;
+                    height: 25%;
+                    @include flex-center;
+                    background: linear-gradient(to right, #052B1E 70%, #104c2ae6 85%);
+                    h2{
+                        margin-left: $text-left-margin;
+                        width: 100%;
+                        font-size: 40px;
+                        position: relative;
+                        &::before{
+                            content: "";
+                            display: inline-block;
+                            height: 70%;
+                            width: 12.5px;
+                            background-color: $main-color;
+                            position: absolute;
+                            bottom: 10%;
+                            left: -20px;
+                        }
+                    }
+                }
+                .subContainer{
+                    position: relative;
+                    height: 70%;
+                    width: 100%;
+                    @include flex-center;
+                    justify-content: flex-start;
+
+                    .explanation{
+                        margin-left: $text-left-margin;
+                        width: 50%;
+                        height: 85%;
+                        font-size: 20px;
+                    }
+                    .creationCardContainer{
+                        width: 32.5%;
+                        height: 125%;
+                        position: absolute;
+                        right: 0;
+                        background-color: $white-green;
+                        transform: translate(-10%, -10%);
+                        border: solid 5px $white-green;
+                        border-radius: 10px;
+                        overflow: hidden;
+    
+                        .cardContent{
+                            width: 100%;
+                            height: 25vh;
+                            margin-bottom: 5px;
+                            border: solid 4px $dark-main-color;
+                            border-radius: 5px;
+                            background: $dark-main-color;
+                            filter: brightness(75%);
+                        }
+                    }                 
+                }
+
+            }
+        }
+    }
+    .mention{
+        padding-bottom: 2.5rem;
+        .contentContainer{
+            height: 70vh;
+            @include flex-center;
+            border: none;
+
+            .card{
+                transform: scale(1.25);
+                h3{
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
+.sidebar{/*representative*/}
+
+
+.card{
+    width: 22.5%;
+    height: 55.5vh;
+    @include flex-center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 7px 5px;
+    background: $white;
+    border-radius: 5px;
+    border: solid 3px $main-color;
+
+    .memberProfilePic{
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 5px;
+        border: solid 2px $main-color;
+        background: $dark-main-color;
+    }
+    .infoContainer{
+        width: 100%;
+        @include flex-center;
+        flex-direction: column;
+        flex: 1;
+        h3{
+            @include highlight-text;
+            text-align: center;
+            font-size: 17.5px;
+        }
+        .memberRole{
+            color: $dark-main-color;
+            text-align: center;
+            font-weight: bolder;
+            margin-top: -7px;
+        }
+        .memberDescription{
+            height: 50%;
+            width: 100%;
+            display: flex;
+            padding: 5px;
+            margin: 10px 0;
+            background-color: $dark-main-color;
+            color: $white;
+            border-radius: 5px;
+            font-size: 7.5px;
+        }
+    }
+    .skillsContainer{
+        width: 100%;
+        h4{
+            color: $dark-main-color;
+            font-weight: bolder;
+            font-size: 12.5px;
+        }
+        .subContainer{
+            display: flex;
+            .skill{
+                padding: 1px 10px;
+                color: $white;
+                background: $dark-main-color;
+                border-radius: 5px;
+                font-size: 10px;
+                margin-right: 5px;
+            }
+        }
+    }
+}

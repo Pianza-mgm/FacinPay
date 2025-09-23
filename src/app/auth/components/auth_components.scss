@@ -1,0 +1,76 @@
+#container{
+    width: 25vw;
+    height: 80vh;
+    position: relative;
+    @include flex-center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+    
+    box-shadow: 0 0 20px $white-green;
+    border-radius: 15px;
+    *{
+        color: $white-green;
+    }
+    ::before{
+        content: "";
+        position: absolute;
+        inset: 0; /* ocupa 100% do container */
+        background: rgb(3, 24, 22, .33%);
+        backdrop-filter: blur(2px);
+        z-index: -1;  /* joga atrás do conteúdo */
+    }
+    #title-container{
+        h1{
+            @include highlight-text;
+            font-size: 45px;
+            margin-top: -20px;
+        }
+    }
+    #input-container{
+        width: 90%;
+        height: 30%;
+
+        @include flex-center;
+        flex-direction: column;
+        >*{
+            width: 100%;
+        }
+        input{
+            height: 6vh;
+            padding: 10px;
+            margin-top: 20px;
+            box-shadow: 0 0 5px $white-green;
+            border-radius: 5px;
+            ::placeholder{
+                color: $white-green !important;
+                opacity: 1;
+            }
+            ::-webkit-input-placeholder{
+                color: $white-green !important;
+                opacity: 1;
+            }
+        }
+        #redirect-link-container{
+            display: flex;
+            justify-content: flex-end;
+            p{
+                #redirect-link{
+                    @include highlight-text;
+                }
+            }
+        }
+    }
+    #button-container{
+        width: 70%;
+        button{
+            width: 100%;
+            height: 7vh;
+            @include flex-center;
+            border-radius: 5px;
+            background: $dark-main-color;
+            box-shadow: 0 0 5px $white-green;
+            cursor: pointer;
+        }
+    }
+}
