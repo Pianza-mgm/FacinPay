@@ -23,3 +23,7 @@ $dark-main-color: #042522;
   color: $main-color;
   font-weight: bolder;
 }
+@mixin neon-text($color){
+  color: $color;
+  text-shadow: darken($color: $color, $amount: 20) 0 0 5px;
+}

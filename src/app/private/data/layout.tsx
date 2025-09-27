@@ -1,18 +1,21 @@
+"use client";
 import { ReactNode } from "react";
 import { Sidebar } from "@/app/components/sidebar";
+import { usePathname } from "next/navigation";
 
 
 export default function DataLayout({ children }: { children: ReactNode }) {
   const links=[
-    { href: "app/private/data/dashboard", label: "Dashboard" },
-    { href: "app/private/data/inflow", label: "Entradas" },
-    { href: "app/private/data/outflow", label: "Saídas" },
-    { href: "app/private/data/persisting_values", label: "Valores Persistetes" },
+    { href: "/private/data/dashboard"        , label: "Dashboard" , ID: "dashboard" },
+    { href: "/private/data/inflow"           , label: "Entradas"  , ID: "inflow"    },
+    { href: "/private/data/outflow"          , label: "Saídas"    , ID: "outflow"   },
+    { href: "/private/data/persisting_values", label: "Constantes", ID: "constants" },
   ]
-    return (
-        <div className="flex min-h-screen">
-          <main className="flex-1 p-6">{children}</main>
-          <Sidebar links={links}/>
-        </div>
-    );
+
+  return (
+    <div style={{height: "90vh"}}>
+      {children}
+      <Sidebar links={links} active={usePathname().split('/').pop() || ""}/>
+    </div>
+  );
 }

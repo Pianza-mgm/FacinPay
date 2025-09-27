@@ -25,7 +25,7 @@ export function Header({isFixed}: {isFixed?: boolean}){
     </div>
   );
 };
-export default function RootLayout({children}: ReadOnly<{children: React.ReactNode}>){
+export default function RootLayout({children}: Readonly<{children: React.ReactNode}>){
   const pathname = usePathname();
   const headerFixed = pathname.includes("/about");
 

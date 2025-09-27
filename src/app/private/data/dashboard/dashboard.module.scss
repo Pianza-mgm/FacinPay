@@ -1,0 +1,110 @@
+.page{
+    width: 85vw;
+    height: 90vh;
+    @include flex-center;
+    align-items: flex-start;
+}
+.container{
+    height: 85vh;
+    width: 90%;
+    @include flex-center;
+    flex-direction: column;
+    justify-content: space-between;
+    >*{
+        width: 100%;
+    }
+    .subHeader{
+        height: 7.5vh;
+        display: flex;
+        justify-content: space-evenly;
+        border: solid 1px $main-color;
+        border-top: none;
+        box-shadow: darken($color: $main-color, $amount: 20) 0 0 10px;
+        border-radius: 0 0 5px 5px;
+        .subHeaderItem{
+            @include flex-center;
+            text-align: center;
+            height: auto;
+            *{
+                @include neon-text($main-color);
+                font-size: 1.175rem;
+            }
+            > span{
+                margin-right: 5px;
+            }
+        }
+    }
+    .contentContainer{
+        height: 87.5%;
+        display: flex;
+        justify-content: space-between;
+        >*{
+            height: 100%;
+        }
+        $card-border: solid 1px darken($color: $white-green, $amount: 20);
+        .card{
+            border: $card-border;
+            box-shadow: darken($color: $white-green, $amount: 60)  0 0 10px;
+            border-radius: 5px;
+            .cardHeader{
+                width: 100%;
+                height: 5vh;
+                border-bottom: $card-border;
+                @include flex-center;
+                @include neon-text($main-color);
+                font-size: 22.5px;
+                font-weight: 100;
+            }
+        }
+
+        .leftSection{
+            width: 23.5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            >*{
+                width: 100%;
+                height: 48.5%;
+            }
+            .spendings{
+
+            }
+            .savings{
+
+            }
+        }
+
+        .goals{
+            width: 23.5%;
+            display: flex;
+            flex-direction: column;
+            .goalWrapper{
+                flex: 1;
+                .goal{
+                    height: 33.3%;
+                    border-bottom: $card-border;
+                    &:last-child{
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+
+        .rightSection{
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            >*{
+                height: 48.5%;
+                width: 100%;
+            }
+            .inflowCard{
+
+            }
+            .outflowCard{
+
+            }
+        }
+    }
+}

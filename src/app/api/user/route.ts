@@ -20,6 +20,7 @@ export async function POST(req: Request){
     return NextResponse.json({ error: "Erro ao registrar usuário" }, { status: 400 });
   }
 }
+
 export async function GET(req: Request){
   const { searchParams } = new URL(req.url);
   const email = searchParams.get("email");

@@ -1,5 +1,5 @@
 There are two main folders: Public (for everyone) and Private (for authenticated users only)
-For the auth, we're using NextAuth with a middleware to control who can access the private pages
+For the auth, we're using NextAuth with a middleware (NEXT) to control who can access the private pages
 The connection with the db api is done using axios and a file called router.ts (one for each page)
 
 Components: 
@@ -9,3 +9,16 @@ The sidebar works as a separated component, but, in the 'Data' folder, this comp
 Settings:
 'npm i sass-embedded sass-loader' to inject global variables automatically into my other scss files (must me configured at next.config.ts)
 'npm install -D typescript-plugin-css-modules' for css to recognize ts (must be configured at tsconfig.json)
+we're using module.scss to have no conflicts between css's
+
+lib:
+has global components that's gonna be used in the entire app. Importing new every time would cause overload
+
+types:
+for Next to recognize scss classes and Prisma types
+
+NextAuth Config:
+[explain this after...]
+
+other tools:
+IntersectionObserver

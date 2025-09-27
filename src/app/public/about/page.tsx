@@ -1,6 +1,9 @@
+"use client";
 import { Sidebar } from "@/app/components/sidebar";
 import styles from "./about.module.scss";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { LinkProps } from "@/app/auth/components/auth_components";
 
 type MemberProps={
   profilePicPath: string
@@ -38,20 +41,40 @@ function MemberCard({profilePicPath, name, role, description, skills}:MemberProp
 export default function About() {
   const startingPath: String = "/uploads/profile_pics/profile_pic_"
   const members: MemberProps[] = [
-    {profilePicPath: `${startingPath}gustavo.jpg`, name: "Gustavo Paes"     , role: "Idealizador"               , description: '"None"', skills: ["Content Writer"]},
-    {profilePicPath: `${startingPath}yasmin.jpg` , name: "Yasmin Akemi"     , role: "Membro"                    , description: '"None"', skills: ["Designer"]},
-    {profilePicPath: `${startingPath}raquel.jpg` , name: "Raquel Vitória"   , role: "membro"                    , description: '"None"', skills: ["Designer"]},
-    {profilePicPath: `${startingPath}miguel.jpg` , name: "Miguel Guiraldeli", role: "Programador Geral"         , description: '"Meu deus, alguem me tira daqui"', skills: ["Desenvolvimento Front/Back End" , "Designer"]},
+    {profilePicPath: `${startingPath}gustavo.jpg`, name: "Gustavo Paes"     , role: "Idealizador"      , description: '"None"'                          , skills: ["Content Writer"]},
+    {profilePicPath: `${startingPath}yasmin.jpg` , name: "Yasmin Akemi"     , role: "Membro"           , description: '"None"'                          , skills: ["Designer"]},
+    {profilePicPath: `${startingPath}raquel.jpg` , name: "Raquel Vitória"   , role: "membro"           , description: '"None"'                          , skills: ["Designer"]},
+    {profilePicPath: `${startingPath}miguel.jpg` , name: "Miguel Guiraldeli", role: "Programador Geral", description: '"Meu deus, alguem me tira daqui"', skills: ["Desenvolvimento Front/Back End" , "Designer"]},
     
   ]
   const specialOne: MemberProps=(
     {profilePicPath: `${startingPath}daniel.jpg`, name: "Daniel (AKA Ronald McDonald)", role: "Membro", description: "Perai, tem projeto p fzr?", skills: ["ocultismo", "vendas"]}
   )
 
+  const [active, setActive] = useState("");//holds the ID from the section that's beign watched
+  useEffect(() => {
+    const watcher = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.find((entry) => entry.isIntersecting);
+        if (visible) setActive(visible.target.id);
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    document.querySelectorAll("section").forEach((section) => {
+      watcher.observe(section);
+    });
+
+    return () => watcher.disconnect();
+  }, []);
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-          <section className={styles.project}>
+
+          <section className={styles.project} id="project">
             <div className={styles.sectionTitleDisplayer}>
               <p className={styles.titleContainer}>Projeto</p>
             </div>
@@ -72,7 +95,7 @@ export default function About() {
           </section>
 
 
-          <section className={styles.team}>
+          <section className={styles.team} id="team">
             <div className={styles.sectionTitleDisplayer}>
               <p className={styles.titleContainer}>Equipe</p>
             </div>
@@ -84,7 +107,7 @@ export default function About() {
           </section>
 
 
-          <section className={styles.creation}>
+          <section className={styles.creation} id="creation">
             <div className={styles.sectionTitleDisplayer}>
               <p className={styles.titleContainer}>Criação</p>
             </div>
@@ -167,7 +190,7 @@ export default function About() {
           </section>
 
 
-          <section className={styles.mention}>
+          <section className={styles.mention} id="mention">
             <div className={styles.sectionTitleDisplayer}>
               <p className={styles.titleContainer}>Menção Honrosa</p>
             </div>
@@ -176,14 +199,15 @@ export default function About() {
             </div>
           </section>
       </main>
-      <Sidebar links={
-          [
-            { href: "#project" , label: "Projeto"        },
-            { href: "#team"    , label: "Equipe"         },
-            { href: "#creation", label: "Criação"        },
-            { href: "#mention" , label: "Menção Honrosa" }
-          ]
-        } />
+      <Sidebar 
+        links={[
+          { href: "#project" , label: "Projeto"        },
+          { href: "#team"    , label: "Equipe"         },
+          { href: "#creation", label: "Criação",       },
+          { href: "#mention" , label: "Menção Honrosa",}
+        ]}
+        active={active}
+      />
     </div>
   );
 }
