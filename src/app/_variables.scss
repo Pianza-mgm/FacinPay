@@ -1,18 +1,20 @@
-$bg-color: #161A1B;
+$bg-color: hsl(175, 33%, 4%);
 
-$white: #E2F2EE;
-$white-green: #C4DCD6;
+$white: hsl(165, 38%, 92%);
+$white-green: hsl(162, 20%, 80%);
 
-$black: #0F1113;
+$gray-green: hsl(166, 21%, 71%);
 
-$main-color-lighter: #0CB85F;
-$main-color: #129B4B;
-$main-color-darker: #18855F;
+$black: hsl(210, 11%, 7%);
 
-$middle-color: #0C3426;
+$main-color-lighter: hsl(149, 88%, 38%);
+$main-color: hsl(145, 79%, 34%);
+$main-color-darker: hsl(159, 69%, 31%);
 
-$dark-main-color-lighter: #052B1E;
-$dark-main-color: #042522;
+$middle-color: hsl(159, 63%, 13%);
+
+$dark-main-color-lighter: hsl(159, 79%, 9%);
+$dark-main-color: hsl(175, 80%, 8%);
 
 @mixin flex-center{
   display: flex;
@@ -25,5 +27,14 @@ $dark-main-color: #042522;
 }
 @mixin neon-text($color){
   color: $color;
-  text-shadow: darken($color: $color, $amount: 20) 0 0 5px;
+  text-shadow: darken($color: $color, $amount: 15) 0 0 2.5px;
+}
+@mixin sub-header($border-color){
+  border-top: none;
+  box-shadow: darken($color: $border-color, $amount: 20) 0 0 5px 2px;
+  border-radius: 0 0 5px 5px;
+}
+@mixin topic($color, $measure){
+  border-left: solid $measure $color;
+  padding-left: $measure;
 }

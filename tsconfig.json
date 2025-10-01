@@ -22,12 +22,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@lib/*": ["./src/lib/*"],
-      "@private/*": ["./src/private/*"],
-      "@data/*": ["./scr/private/data*"],
-      "@public/*": ["./scr/public/*"],
-      "@auth/*": ["./scr/auth/*"],
+      "@/*":         ["./src/*"],
+      "@lib/*":      ["./src/lib/*"],
+      "@private/*":  ["./src/app/private/*"],
+      "@data/*":     ["./src/app/private/data*"],
+      "@public/*":   ["./src/app/public/*"],
+      "@auth/*":     ["./src/app/auth/*"],
+      "@components/*": ["./src/app/components/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts" , "src/types/**/*.d.ts"],

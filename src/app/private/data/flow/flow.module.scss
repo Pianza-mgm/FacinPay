@@ -1,0 +1,87 @@
+.page{
+    @include flex-center;
+    flex-direction: column;
+}
+.chartContainer{
+    width: 80%;
+    height: 55%;
+}
+.expenseTable{
+    width: 80%;
+    height: 40%;
+    border: solid 2px $white-green;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+
+    .expensesContainer{
+        height: 82.5%;
+        overflow-y: scroll;
+
+        .expenseRow{
+            height: 28.5%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            border-bottom: solid 2px $white-green;
+
+            &:last-child{
+                border-bottom: none;
+            }
+            span{
+                font-weight: 300;
+            }
+            .group{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                &.mainInfo{
+                    width: 55%;
+                }
+            }
+            .expenseDate{
+
+            }
+            .expenseDescription{
+
+            }
+            .expenseAmount{
+                &.negativeRow{
+                    color: red;
+                }
+                &.positiveRow{
+                    color: green;
+                }
+            }
+            .expenseCategory{
+                background-color: $dark-main-color;
+                margin-left: 10px;
+                padding: 5px 8px;
+                border-radius: 5px;
+                font-size: 0.8rem;
+            }
+            .editButton{
+                background-color: $main-color;
+                margin-left: 10px;
+                padding: 4px 14px;
+                border-radius: 5px;
+            }
+        }
+    }
+    .buttonContainer{
+        flex: 1;
+        @include flex-center;
+        justify-content: flex-end;
+        border-top: solid 2px $white-green;
+        .addButton{
+            @include flex-center;
+            width: 12.9%;
+            margin-right: 5px;
+            padding: 5px 10px;
+            background-color: $main-color;
+            border-radius: 5px;
+        }
+    }
+}

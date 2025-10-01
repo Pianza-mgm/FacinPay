@@ -31,7 +31,7 @@ export default function Course(){
 }
 export function Card(){
     return(
-        <div className={styles.card}>
+        <div className={cn(styles.card, "card")}>
             <div className={styles.cardDisplayer}>
             </div>
             <h2 className={styles.cardPrice}><div className={styles.measure}>R$</div>39,99</h2>
@@ -40,7 +40,7 @@ export function Card(){
                     <Link href="/" className={cn(styles.buyButton, styles.cardButton)}>Comprar Plano</Link>
                     <button className={cn(styles.closeButton, styles.cardButton)}>X</button>
                 </div>
-                <Link className={styles.planLink} className={styles.cardButton} href="/public/plans">Verificar Outros Planos</Link>
+                <Link className={cn(styles.planLink, styles.cardButton)} href="/public/plans">Verificar Outros Planos</Link>
             </div>
             <div className={styles.extraInfo}>
                 <h4>Sobre Este Plano</h4>

@@ -1,6 +1,4 @@
 .page{
-    width: 85vw;
-    height: 90vh;
     @include flex-center;
     align-items: flex-start;
 }
@@ -18,9 +16,7 @@
         display: flex;
         justify-content: space-evenly;
         border: solid 1px $main-color;
-        border-top: none;
-        box-shadow: darken($color: $main-color, $amount: 20) 0 0 10px;
-        border-radius: 0 0 5px 5px;
+        @include sub-header($main-color);
         .subHeaderItem{
             @include flex-center;
             text-align: center;
@@ -43,6 +39,8 @@
         }
         $card-border: solid 1px darken($color: $white-green, $amount: 20);
         .card{
+            display: flex;
+            flex-direction: column;
             border: $card-border;
             box-shadow: darken($color: $white-green, $amount: 60)  0 0 10px;
             border-radius: 5px;
@@ -54,6 +52,11 @@
                 @include neon-text($main-color);
                 font-size: 22.5px;
                 font-weight: 100;
+            }
+            .cardBody{
+                @include flex-center;
+                flex: 1;
+                padding: 10px;
             }
         }
 
@@ -81,10 +84,27 @@
             .goalWrapper{
                 flex: 1;
                 .goal{
+                    @include flex-center;
+                    padding: 0 10px 20px;
+                    flex-direction: column;
+                    justify-content: space-between;
                     height: 33.3%;
                     border-bottom: $card-border;
                     &:last-child{
                         border-bottom: none;
+                    }
+                    .goalTitle{
+                        @include sub-header($main-color);
+                        width: 100%;
+                        text-align: left;
+                        @include neon-text($main-color);
+                        font-size: 1.2rem;
+                        border-left: solid 7px $main-color;
+                        padding-left: 15px;
+                    }
+                    .goalDescription{
+                        @include neon-text($white-green);
+                        font-size: .8rem;
                     }
                 }
             }
